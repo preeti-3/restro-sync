@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 216 33% 97%; --foreground: 222 47% 11%;
+    --card: 0 0% 100%; --card-foreground: 222 47% 11%;
+    --primary: 224 76% 48%; --primary-foreground: 0 0% 100%;
+    --secondary: 214 95% 93%; --secondary-foreground: 224 76% 28%;
+    --muted: 210 40% 96%; --muted-foreground: 215 16% 42%;
+    --accent: 258 90% 66%; --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 51%; --destructive-foreground: 0 0% 100%;
+    --border: 214 32% 89%; --input: 214 32% 89%; --ring: 224 76% 48%; --radius: .75rem;
+  }
+
+  * { @apply border-border; }
+  html { @apply bg-background scroll-smooth; }
+  body { @apply min-w-0 overflow-x-hidden bg-background font-sans text-foreground antialiased; }
+  button, a, select { touch-action: manipulation; }
+  button, a, select, [role="button"] { @apply cursor-pointer; }
+  ::selection { @apply bg-blue-200 text-slate-950; }
+  :focus-visible { @apply outline-none ring-2 ring-ring ring-offset-2; }
+}
+
+@layer components {
+  .surface { @apply min-w-0 rounded-2xl border border-slate-200/80 bg-card shadow-[0_1px_2px_rgba(15,23,42,0.03),0_8px_24px_rgba(15,23,42,0.03)]; }
+  .touch-target { @apply min-h-11 min-w-11; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}
+
+@media print {
+  body * { visibility: hidden; }
+  #receipt, #receipt *, #table-qr-print, #table-qr-print * { visibility: visible; }
+  #receipt, #table-qr-print { display: block !important; position: absolute; inset: 0; color: #000; background: #fff; }
+  #receipt { width: 80mm; padding: 4mm; font-size: 12px; }
+}

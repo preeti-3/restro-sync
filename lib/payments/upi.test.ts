@@ -1,0 +1,3 @@
+import { describe, expect, it } from "vitest";
+import { buildUpiUri } from "./upi";
+describe("buildUpiUri", () => { it("encodes payee, amount, reference, and note", () => { const uri = buildUpiUri({ upiId: "restaurant@upi", payeeName: "A & B Kitchen", amountPaise: 12345, reference: "ORD-1/2", note: "Bill #1" }); expect(uri).toContain("pa=restaurant%40upi"); expect(uri).toContain("pn=A+%26+B+Kitchen"); expect(uri).toContain("am=123.45"); expect(uri).toContain("tr=ORD-1%2F2"); }); it("rejects invalid payment details", () => expect(() => buildUpiUri({ upiId: "bad", payeeName: "Test", amountPaise: 0, reference: "x" })).toThrow()); });

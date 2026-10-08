@@ -1,0 +1,8 @@
+"use client";
+import { useActionState } from "react";
+import { Copy,Loader2,Send } from "lucide-react";
+import { inviteStaff } from "@/app/actions/staff";
+import { Button } from "@/components/ui/button";
+import { Card,Input,Label } from "@/components/ui/primitives";
+type State={error?:string;url?:string;ok?:boolean};
+export function StaffInviteForm(){const[state,action,pending]=useActionState<State,FormData>(inviteStaff,{});return <Card className="p-5"><h2 className="font-display font-semibold">Invite staff member</h2><p className="mt-1 text-sm text-muted-foreground">Links expire after seven days and only work for the intended email.</p><form action={action} className="mt-4 grid gap-3 sm:grid-cols-[1fr_180px_auto]"><div><Label htmlFor="invite-email">Email</Label><Input id="invite-email" name="email" type="email" required/></div><div><Label htmlFor="invite-role">Role</Label><select id="invite-role" name="role" className="min-h-11 w-full rounded-lg border bg-white px-3"><option value="CASHIER">Cashier</option><option value="KITCHEN">Kitchen</option><option value="ADMIN">Admin</option></select></div><Button className="self-end" disabled={pending}>{pending?<Loader2 className="animate-spin"/>:<Send/>}Invite</Button></form>{state.error&&<p className="mt-3 text-sm text-red-600">{state.error}</p>}{state.url&&<div className="mt-4 rounded-lg bg-blue-50 p-3"><p className="text-xs font-semibold text-blue-900">Secure invitation URL</p><div className="mt-1 flex gap-2"><code className="min-w-0 flex-1 truncate text-xs">{state.url}</code><Button type="button" size="icon" variant="ghost" aria-label="Copy invitation link" onClick={()=>navigator.clipboard.writeText(state.url!)}><Copy/></Button></div></div>}</Card>}

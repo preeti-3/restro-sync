@@ -1,0 +1,4 @@
+import { createClient } from "@/lib/supabase/server";
+import { requireRole } from "@/lib/auth/session";
+import { MenuManager } from "@/components/admin/menu-manager";
+export default async function MenuPage(){const p=await requireRole("OWNER","ADMIN");const rid=p.membership.restaurant_id;const s=await createClient();const[{data:categories},{data:items}]=await Promise.all([s.from("categories").select("*").eq("restaurant_id",rid).order("sort_order"),s.from("menu_items").select("*").eq("restaurant_id",rid).order("name")]);return <div className="space-y-6"><div><h1 className="font-display text-2xl font-bold">Menu management</h1><p className="text-sm text-muted-foreground">Control this restaurant&apos;s catalog, prices, and availability.</p></div><MenuManager categories={categories??[]} items={items??[]}/></div>}

@@ -1,0 +1,4 @@
+import { Building2 } from "lucide-react";
+import { switchWorkspace } from "@/app/actions/workspace";
+import type { SessionProfile } from "@/types";
+export function WorkspaceSelector({profile}:{profile:SessionProfile}){if(profile.memberships.length<2)return <span className="hidden items-center gap-1 text-xs text-muted-foreground md:flex"><Building2 className="h-4 w-4"/>{profile.membership.restaurant.name}</span>;return <form action={switchWorkspace}><label className="sr-only" htmlFor="workspace">Restaurant workspace</label><select id="workspace" name="restaurantId" defaultValue={profile.membership.restaurant_id} onChange={(event)=>event.currentTarget.form?.requestSubmit()} className="min-h-10 max-w-52 rounded-lg border bg-white px-2 text-sm font-semibold">{profile.memberships.map((membership)=><option key={membership.id} value={membership.restaurant_id}>{membership.restaurant.name}</option>)}</select></form>}

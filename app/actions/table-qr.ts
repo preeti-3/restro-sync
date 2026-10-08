@@ -1,0 +1,9 @@
+"use server";
+import { revalidatePath } from "next/cache";
+import { z } from "zod";
+import { requireRole } from "@/lib/auth/session";
+import { createClient } from "@/lib/supabase/server";
+import { hashOpaqueToken, newOpaqueToken } from "@/lib/guest/session";
+export type QrActionResult={ok?:boolean;error?:string;url?:string};
+export async function generateTableQr(tableId:string):Promise<QrActionResult>{await requireRole("OWNER","ADMIN");if(!z.uuid().safeParse(tableId).success)return{error:"Invalid table"};const token=newOpaqueToken();const supabase=await createClient();const {error}=await supabase.rpc("regenerate_table_qr",{p_table_id:tableId,p_token_hash:hashOpaqueToken(token)});if(error)return{error:error.message};revalidatePath("/admin/tables");const base=(process.env.NEXT_PUBLIC_APP_URL??"http://localhost:3000").replace(/\/$/,"");return{ok:true,url:`${base}/order/${token}`};}
+export async function deactivateTableQr(tableId:string):Promise<QrActionResult>{const profile=await requireRole("OWNER","ADMIN");if(!z.uuid().safeParse(tableId).success)return{error:"Invalid table"};const supabase=await createClient();const{error}=await supabase.from("table_qr_codes").update({active:false,deactivated_at:new Date().toISOString()}).eq("restaurant_id",profile.membership.restaurant_id).eq("table_id",tableId).eq("active",true);if(error)return{error:error.message};revalidatePath("/admin/tables");return{ok:true};}
