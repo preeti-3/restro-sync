@@ -52,7 +52,8 @@ RestroSync is a multi-restaurant operations platform built with Next.js 15, Type
    Do not use `db reset` on an existing environment. The migration adds and backfills tenant keys without deleting data. It adds tenant indexes, composite foreign keys, RLS policies, status checks, scoped RPCs, and storage policies. Application assets must use `restaurant-assets/<restaurant_uuid>/...` paths.
 5. On a new local database only, `supabase db reset` applies the demo seed. Run `node scripts/create-demo-users.mjs` after supplying the documented demo credentials; `DEMO_RESTAURANT_ID` is optional and defaults to the seeded restaurant.
 6. Start with `npm run dev` and register a restaurant at `/register`.
-7. In Supabase Auth URL Configuration, allow your application origin and `/invite/**` callback URLs so emailed staff invitations return to the acceptance screen.
+7. In the hosted Supabase Dashboard, open **Authentication → URL Configuration**. Set **Site URL** to your deployed origin (for example `https://restro-sync.vercel.app`) and add `https://restro-sync.vercel.app/**` to **Redirect URLs**. Also set `APP_URL` and `NEXT_PUBLIC_APP_URL` to that same HTTPS origin in the deployment environment. This prevents confirmation and invitation emails from falling back to localhost.
+8. Under **Authentication → Email Templates**, set the invite subject to `You’re invited to join RestroSync` and the confirmation subject to `Confirm your RestroSync account`. Copy the matching HTML from `supabase/templates/`; `config.toml` applies these templates to local Supabase, while hosted projects are configured in the Dashboard.
 
 ## Securely provision the first platform admin
 

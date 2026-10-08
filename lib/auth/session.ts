@@ -9,12 +9,13 @@ export const WORKSPACE_COOKIE = "restrosync_workspace";
 
 export const getSessionProfile = cache(async (): Promise<SessionProfile | null> => {
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return null;
+  const { data, error } = await supabase.auth.getClaims();
+  const userId = data?.claims?.sub;
+  if (error || !userId) return null;
   const [{ data: profile }, { data: rows }, { data: platformAdmin }] = await Promise.all([
-    supabase.from("profiles").select("id,full_name,role,active,created_at").eq("id", user.id).single(),
-    supabase.from("restaurant_members").select("id,restaurant_id,user_id,role,active,restaurant:restaurants(id,name,address,phone,email,status,created_at,approved_at)").eq("user_id", user.id).eq("active", true),
-    supabase.from("platform_admins").select("user_id").eq("user_id", user.id).eq("active", true).maybeSingle(),
+    supabase.from("profiles").select("id,full_name,role,active,created_at").eq("id", userId).single(),
+    supabase.from("restaurant_members").select("id,restaurant_id,user_id,role,active,restaurant:restaurants(id,name,address,phone,email,status,created_at,approved_at)").eq("user_id", userId).eq("active", true),
+    supabase.from("platform_admins").select("user_id").eq("user_id", userId).eq("active", true).maybeSingle(),
   ]);
   if (!profile?.active) return null;
   const memberships = (rows ?? [])

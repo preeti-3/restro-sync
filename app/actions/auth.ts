@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { loginSchema } from "@/lib/validations";
 import { roleHome } from "@/lib/auth/session";
 import { registrationSchema } from "@/lib/validations";
+import { getAppUrl } from "@/lib/app-url";
 
 export type AuthState = { error?: string };
 export async function login(_: AuthState, formData: FormData): Promise<AuthState> {
@@ -31,7 +32,7 @@ export async function registerRestaurant(_: AuthState, formData: FormData): Prom
   if (!parsed.success) return { error: parsed.error.issues[0]?.message ?? "Check your registration details." };
   const supabase = await createClient();
   const { ownerName, restaurantName, address, phone, email, password } = parsed.data;
-  const { data, error } = await supabase.auth.signUp({ email, password, options: { data: { registration_type: "restaurant_owner", owner_name: ownerName, restaurant_name: restaurantName, restaurant_address: address, restaurant_phone: phone } } });
+  const { data, error } = await supabase.auth.signUp({ email, password, options: { emailRedirectTo: `${getAppUrl()}/login`, data: { registration_type: "restaurant_owner", owner_name: ownerName, restaurant_name: restaurantName, restaurant_address: address, restaurant_phone: phone } } });
   if (error) return { error: error.message };
   if (!data.session) return { error: "Check your email to confirm the account, then sign in to view approval status." };
   redirect("/onboarding/pending");

@@ -36,7 +36,7 @@ export function AdminSidebar() {
         {links.map(({ href, label, icon: Icon }) => {
           const active = isActive(pathname, href);
           return (
-            <Link key={href} href={href} aria-current={active ? "page" : undefined} className={cn("group flex min-h-11 items-center gap-3 rounded-xl px-3 text-sm font-semibold transition-all duration-200", active ? "bg-blue-600 text-white shadow-[0_8px_22px_rgba(37,99,235,0.28)]" : "text-slate-400 hover:bg-white/[0.07] hover:text-white")}>
+            <Link key={href} href={href} prefetch={false} aria-current={active ? "page" : undefined} className={cn("group flex min-h-11 items-center gap-3 rounded-xl px-3 text-sm font-semibold transition-all duration-200", active ? "bg-blue-600 text-white shadow-[0_8px_22px_rgba(37,99,235,0.28)]" : "text-slate-400 hover:bg-white/[0.07] hover:text-white")}>
               <span className={cn("grid h-8 w-8 shrink-0 place-items-center rounded-lg transition-colors", active ? "bg-white/15" : "bg-white/[0.04] group-hover:bg-white/[0.08]")}>
                 <Icon className="h-[18px] w-[18px]" aria-hidden="true" />
               </span>
@@ -65,7 +65,7 @@ export function AdminMobileNav() {
       {mobileLinks.map(({ href, label, icon: Icon }) => {
         const active = isActive(pathname, href);
         return (
-          <Link key={href} href={href} aria-current={active ? "page" : undefined} className={cn("flex min-h-14 min-w-0 flex-col items-center justify-center gap-1 rounded-lg px-1 text-[10px] font-semibold transition-colors", active ? "bg-blue-50 text-primary" : "text-muted-foreground")}>
+          <Link key={href} href={href} prefetch={false} aria-current={active ? "page" : undefined} className={cn("flex min-h-14 min-w-0 flex-col items-center justify-center gap-1 rounded-lg px-1 text-[10px] font-semibold transition-colors", active ? "bg-blue-50 text-primary" : "text-muted-foreground")}>
             <Icon className="h-5 w-5" aria-hidden="true" />
             <span className="truncate">{label}</span>
           </Link>
@@ -82,7 +82,7 @@ export function AdminMobileNav() {
           <DropdownMenu.Content side="top" align="end" sideOffset={10} className="z-50 min-w-48 rounded-xl border bg-white p-1.5 shadow-xl">
             {moreLinks.map(({ href, label, icon: Icon }) => (
               <DropdownMenu.Item key={href} asChild>
-                <Link href={href} className="flex min-h-11 cursor-pointer items-center gap-3 rounded-lg px-3 text-sm font-semibold outline-none transition-colors focus:bg-muted">
+                <Link href={href} prefetch={false} className="flex min-h-11 cursor-pointer items-center gap-3 rounded-lg px-3 text-sm font-semibold outline-none transition-colors focus:bg-muted">
                   <Icon className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
                   {label}
                 </Link>

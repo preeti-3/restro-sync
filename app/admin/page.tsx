@@ -82,7 +82,7 @@ export default async function AdminDashboard() {
           Live operating numbers for today.
         </p>
         </div>
-        <Link href="/admin/reports" className="inline-flex min-h-11 items-center justify-center gap-2 self-start rounded-xl border bg-white px-4 text-sm font-semibold text-slate-700 shadow-sm transition-colors hover:border-blue-200 hover:bg-blue-50 hover:text-primary sm:self-auto">
+        <Link href="/admin/reports" prefetch={false} className="inline-flex min-h-11 items-center justify-center gap-2 self-start rounded-xl border bg-white px-4 text-sm font-semibold text-slate-700 shadow-sm transition-colors hover:border-blue-200 hover:bg-blue-50 hover:text-primary sm:self-auto">
           View reports <ArrowRight className="h-4 w-4" aria-hidden="true"/>
         </Link>
       </div>
@@ -157,7 +157,7 @@ export default async function AdminDashboard() {
       <Card className="overflow-hidden">
         <div className="flex items-center justify-between border-b p-5 sm:px-6">
           <div><h2 className="font-display font-bold text-slate-900">Recent orders</h2><p className="mt-0.5 text-sm text-muted-foreground">Latest activity from your order queue</p></div>
-          <Link href="/admin/orders" className="inline-flex min-h-10 items-center gap-1.5 rounded-lg px-3 text-sm font-semibold text-primary transition-colors hover:bg-blue-50">View all <ArrowRight className="h-4 w-4" aria-hidden="true"/></Link>
+          <Link href="/admin/orders" prefetch={false} className="inline-flex min-h-10 items-center gap-1.5 rounded-lg px-3 text-sm font-semibold text-primary transition-colors hover:bg-blue-50">View all <ArrowRight className="h-4 w-4" aria-hidden="true"/></Link>
         </div>
         {recent?.length ? (
           <div className="overflow-x-auto">

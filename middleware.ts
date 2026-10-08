@@ -21,12 +21,22 @@ export async function middleware(request: NextRequest) {
       },
     },
   );
-  await supabase.auth.getUser();
+  // With asymmetric signing keys this verifies locally instead of calling the
+  // Auth server on every request. It still refreshes expired cookie sessions.
+  await supabase.auth.getClaims();
   return response;
 }
 
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    "/",
+    "/login",
+    "/invite/:path*",
+    "/admin/:path*",
+    "/cashier/:path*",
+    "/kitchen/:path*",
+    "/platform/:path*",
+    "/onboarding/:path*",
+    "/workspace/:path*",
   ],
 };

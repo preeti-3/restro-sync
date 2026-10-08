@@ -4,8 +4,8 @@ import { getSessionProfile, roleHome } from "@/lib/auth/session";
 import { LoginForm } from "@/components/auth/login-form";
 import Link from "next/link";
 
-export default async function LoginPage({searchParams}:{searchParams:Promise<{next?:string}>}) {
-  const {next}=await searchParams;
+export default async function LoginPage({searchParams}:{searchParams:Promise<{next?:string;error?:string}>}) {
+  const {next,error}=await searchParams;
   const profile = await getSessionProfile();
   if (profile?.is_platform_admin) redirect("/platform");
   if (profile?.membership) redirect(roleHome(profile.membership.role));
@@ -58,6 +58,7 @@ export default async function LoginPage({searchParams}:{searchParams:Promise<{ne
           <p className="mb-8 mt-2 text-muted-foreground">
             Use the account created by your restaurant administrator.
           </p>
+          {error && <p role="alert" className="mb-5 rounded-lg bg-red-50 p-3 text-sm font-medium text-red-700">{error}</p>}
           <LoginForm next={next} />
           <p className="mt-6 text-center text-sm text-muted-foreground">Opening a new outlet? <Link href="/register" className="font-semibold text-primary hover:underline">Register your restaurant</Link></p>
         </div>
