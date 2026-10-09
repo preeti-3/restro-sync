@@ -19,18 +19,18 @@
 
 | Role | Hex | CSS Variable |
 |------|-----|--------------|
-| Primary | `#1E3A8A` | `--color-primary` |
+| Primary | `#EA580C` | `--color-primary` |
 | On Primary | `#FFFFFF` | `--color-on-primary` |
-| Secondary | `#3B82F6` | `--color-secondary` |
-| Accent/CTA | `#7C3AED` | `--color-accent` |
-| Background | `#F8FAFC` | `--color-background` |
-| Foreground | `#1E40AF` | `--color-foreground` |
-| Muted | `#E9EEF5` | `--color-muted` |
-| Border | `#BFDBFE` | `--color-border` |
+| Secondary | `#DDEFE6` | `--color-secondary` |
+| Accent/CTA | `#173B31` | `--color-accent` |
+| Background | `#FBF7F1` | `--color-background` |
+| Foreground | `#173B31` | `--color-foreground` |
+| Muted | `#F5EEE5` | `--color-muted` |
+| Border | `#F2DCC8` | `--color-border` |
 | Destructive | `#DC2626` | `--color-destructive` |
-| Ring | `#1E3A8A` | `--color-ring` |
+| Ring | `#EA580C` | `--color-ring` |
 
-**Color Notes:** Knowledge blue + link purple + clean white
+**Color Notes:** Warm restaurant orange + deep dining-room green + cream surfaces
 
 ### Typography
 

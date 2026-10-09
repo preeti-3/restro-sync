@@ -4,14 +4,14 @@
 
 @layer base {
   :root {
-    --background: 216 33% 97%; --foreground: 222 47% 11%;
-    --card: 0 0% 100%; --card-foreground: 222 47% 11%;
-    --primary: 224 76% 48%; --primary-foreground: 0 0% 100%;
-    --secondary: 214 95% 93%; --secondary-foreground: 224 76% 28%;
-    --muted: 210 40% 96%; --muted-foreground: 215 16% 42%;
-    --accent: 258 90% 66%; --accent-foreground: 0 0% 100%;
+    --background: 36 45% 96%; --foreground: 164 43% 16%;
+    --card: 40 100% 99%; --card-foreground: 164 43% 16%;
+    --primary: 21 90% 52%; --primary-foreground: 0 0% 100%;
+    --secondary: 151 31% 91%; --secondary-foreground: 164 43% 20%;
+    --muted: 32 38% 93%; --muted-foreground: 24 12% 39%;
+    --accent: 164 43% 16%; --accent-foreground: 0 0% 100%;
     --destructive: 0 72% 51%; --destructive-foreground: 0 0% 100%;
-    --border: 214 32% 89%; --input: 214 32% 89%; --ring: 224 76% 48%; --radius: .75rem;
+    --border: 28 55% 88%; --input: 28 55% 88%; --ring: 21 90% 52%; --radius: 1rem;
   }
 
   * { @apply border-border; }
@@ -19,12 +19,12 @@
   body { @apply min-w-0 overflow-x-hidden bg-background font-sans text-foreground antialiased; }
   button, a, select { touch-action: manipulation; }
   button, a, select, [role="button"] { @apply cursor-pointer; }
-  ::selection { @apply bg-blue-200 text-slate-950; }
+  ::selection { @apply bg-orange-200 text-emerald-950; }
   :focus-visible { @apply outline-none ring-2 ring-ring ring-offset-2; }
 }
 
 @layer components {
-  .surface { @apply min-w-0 rounded-2xl border border-slate-200/80 bg-card shadow-[0_1px_2px_rgba(15,23,42,0.03),0_8px_24px_rgba(15,23,42,0.03)]; }
+  .surface { @apply min-w-0 rounded-2xl border border-orange-100 bg-card shadow-[0_1px_2px_rgba(67,35,18,0.03),0_10px_28px_rgba(67,35,18,0.05)]; }
   .touch-target { @apply min-h-11 min-w-11; }
 }
 

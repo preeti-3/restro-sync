@@ -6,7 +6,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   const profile = await requireRole("OWNER", "ADMIN");
 
   return (
-    <div className="min-h-dvh bg-background lg:h-dvh lg:overflow-hidden">
+    <div className="min-h-dvh bg-[#fbf7f1] lg:h-dvh lg:overflow-hidden">
       <AdminSidebar />
       <div className="min-w-0 lg:h-dvh lg:overflow-y-auto lg:pl-72">
         <AppHeader profile={profile} title="Admin console" />
